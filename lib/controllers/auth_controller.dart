@@ -17,8 +17,8 @@ class AuthController extends GetxController {
   final FirebaseService _firebaseService = FirebaseService();
   var isLoading = false.obs; // Observa si se está cargando una operación
   var user = Rxn<Usuario>(); // Observa el estado del usuario
-  final storage =
-      GetStorage(); // Crear una instancia de GetStorage para almacenar las credenciales
+  final storage = GetStorage()
+      .obs; // Crear una instancia de GetStorage para almacenar las credenciales
 
   @override
   void onInit() {
@@ -160,14 +160,14 @@ class AuthController extends GetxController {
 
   // Guardar las credenciales de usuario usando GetStorage
   Future<void> _saveCredentials(String email, String password) async {
-    storage.write('email', email);
-    storage.write('password', password);
+    storage.value.write('email', email);
+    storage.value.write('password', password);
   }
 
   // Intentar login automático
   Future<void> _autoLogin() async {
-    String? email = storage.read('email');
-    String? password = storage.read('password');
+    String? email = storage.value.read('email');
+    String? password = storage.value.read('password');
 
     if (email != null && password != null) {
       await login(email, password); // Auto login con credenciales guardadas
@@ -176,7 +176,7 @@ class AuthController extends GetxController {
 
   // Eliminar las credenciales guardadas
   Future<void> _clearCredentials() async {
-    storage.remove('email');
-    storage.remove('password');
+    storage.value.remove('email');
+    storage.value.remove('password');
   }
 }

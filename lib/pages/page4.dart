@@ -2,6 +2,7 @@ import 'package:auth_2024/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:auth_2024/pages/qr_page.dart';
 
 class Page4 extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
@@ -90,11 +91,11 @@ class Page4 extends StatelessWidget {
               controller: _phoneController,
               decoration: InputDecoration(
                 labelText: 'Celular',
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
               keyboardType: TextInputType.phone,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // Campo de selección de fecha de nacimiento
             Row(
@@ -107,12 +108,12 @@ class Page4 extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.calendar_today),
+                  icon: const Icon(Icons.calendar_today),
                   onPressed: () => _selectBirthDate(context),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Botón para guardar cambios
             ElevatedButton(
@@ -132,11 +133,17 @@ class Page4 extends StatelessWidget {
                 );
 
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Datos guardados exitosamente')),
+                  const SnackBar(content: Text('Datos guardados exitosamente')),
                 );
               },
-              child: Text('Guardar cambios'),
+              child: const Text('Guardar cambios'),
             ),
+            const SizedBox(
+              height: 15,
+            ),
+            ElevatedButton(
+                onPressed: () => Get.to(QrCodePage()),
+                child: const Text('Iniciar sesión con QR'))
           ],
         ),
       ),

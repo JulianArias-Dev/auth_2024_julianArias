@@ -42,17 +42,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCw1YDJ8hL9woIA3qMC0UhOTMeTg_wn45A',
-    appId: '1:449702727144:web:e48dec1d6583662c1c285d',
+    appId: '1:449702727144:web:6794d838459c42121c285d',
     messagingSenderId: '449702727144',
     projectId: 'observatorio-56505',
     authDomain: 'observatorio-56505.firebaseapp.com',
     storageBucket: 'observatorio-56505.appspot.com',
-    measurementId: 'G-MBDFJEVGDN',
+    measurementId: 'G-D1L8DTMSTQ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDaG-OSJf2F-paaApdyM-ue_YHW5bsTgeU',
-    appId: '1:449702727144:android:8038303cb7b7a84d1c285d',
+    appId: '1:449702727144:android:c748c7bec51dfe381c285d',
     messagingSenderId: '449702727144',
     projectId: 'observatorio-56505',
     storageBucket: 'observatorio-56505.appspot.com',

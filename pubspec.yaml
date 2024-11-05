@@ -47,6 +47,8 @@ dependencies:
   uuid: 
   path_provider:
   file:
+  qr_flutter: 
+  qrscan :
 
 dev_dependencies:
   flutter_test:

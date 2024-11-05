@@ -115,18 +115,20 @@ class FirebaseService {
         DocumentSnapshot doc =
             await _firestore.collection('users').doc(user.uid).get();
 
-        if (doc.exists) {
-          // Creamos una instancia de Usuario usando los datos del documento
+        if (doc.exists && doc.data() != null) {
+          // Creamos una instancia de Usuario usando los datos del documento, con condiciones
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
           Usuario usuario = Usuario(
             id: user.uid,
-            email: doc['email'],
-            name: doc['name'],
-            whatsapp: doc['whatsapp'],
-            phone: doc['phone'],
-            birthDate: doc['birthDate'] != null
-                ? (doc['birthDate'] as Timestamp).toDate()
+            email: data['email'],
+            name: data['name'],
+            whatsapp: data.containsKey('whatsapp') ? data['whatsapp'] : null,
+            phone: data.containsKey('phone') ? data['phone'] : null,
+            birthDate: data.containsKey('birthDate')
+                ? (data['birthDate'] as Timestamp).toDate()
                 : null,
-            imageUrl: doc['imageUrl'],
+            imageUrl: data.containsKey('imageUrl') ? data['imageUrl'] : null,
           );
 
           return usuario; // Retorna el objeto Usuario

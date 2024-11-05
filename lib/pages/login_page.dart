@@ -2,6 +2,8 @@ import 'package:auth_2024/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/auth_controller.dart';
+import 'package:auth_2024/pages/qr_page.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
 
 class LoginPage extends StatelessWidget {
   final AuthController _authController =
@@ -10,6 +12,16 @@ class LoginPage extends StatelessWidget {
       TextEditingController(); // Controlador para el email
   final TextEditingController _passwordController =
       TextEditingController(); // Controlador para la contraseña
+
+  void scanQr() async {
+    String? cameraResult = await scanner.scan();
+    if (cameraResult != null) {
+      List<String> credentials = cameraResult.split(':');
+      String email = credentials[0];
+      String password = credentials[1];
+      _authController.login(email, password);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +50,16 @@ class LoginPage extends StatelessWidget {
                       child:
                           CircularProgressIndicator()) // Mostrar el indicador de carga
                   : _buildLoginButton(context)),
+              SizedBox(height: 20),
+              Center(
+                child: FilledButton(
+                  onPressed: () => scanQr(),
+                  child: Text(
+                    'Iniciar sesion con QR',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
               Spacer(),
               Center(
                 child: GestureDetector(
